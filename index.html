@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training Plan for Julia</title>
+    <style>
+        /* Основной стиль для страницы */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background-color: #ffe4e6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            color: #fff;
+            padding: 20px 10px;
+            text-align: center;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 10px 0 0;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .video-container {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        iframe {
+            width: 100%;
+            max-width: 800px;
+            aspect-ratio: 16 / 9;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid #ff7eb3;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #ff7eb3;
+            border-top: 5px solid #ff4f81;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            position: absolute;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .day-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .day-buttons button {
+            background: #ff7eb3;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .day-buttons button:hover {
+            background: #ff4f81;
+        }
+
+        .footer {
+            background-color: #ff758c;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-size: 14px;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 10px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            iframe {
+                aspect-ratio: 16 / 9;
+            }
+
+            .day-buttons button {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Юлин План Тренировок</h1>
+        <p>Тренируйся с удовольствием и достигай своих целей!</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Кнопки для дней тренировок -->
+        <div class="day-buttons">
+            <button onclick="showDay('day1', 'https://player.vimeo.com/video/1030770396?autoplay=1&loop=1&background=1')">День 1</button>
+            <button onclick="showDay('day2', 'https://player.vimeo.com/video/1030770421?autoplay=1&loop=1&background=1')">День 2</button>
+            <button onclick="showDay('day3', 'https://player.vimeo.com/video/1030770439?autoplay=1&loop=1&background=1')">День 3</button>
+        </div>
+
+        <!-- Видео для каждого дня -->
+        <div id="day1" class="video-container">
+            <div class="spinner" id="spinner1"></div>
+            <iframe id="video1" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+        <div id="day2" class="video-container">
+            <div class="spinner" id="spinner2"></div>
+            <iframe id="video2" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+        <div id="day3" class="video-container">
+            <div class="spinner" id="spinner3"></div>
+            <iframe id="video3" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Юлин План Тренировок. Все права защищены.</p>
+    </footer>
+
+    <script>
+        // Функция для переключения дней и отображения спиннера
+        function showDay(dayId, videoSrc) {
+            // Скрыть все видео и обнулить src
+            const days = document.querySelectorAll('.video-container');
+            days.forEach(day => {
+                day.style.display = 'none';
+                const iframe = day.querySelector('iframe');
+                if (iframe) iframe.src = '';
+            });
+
+            // Показать выбранный день
+            const currentDay = document.getElementById(dayId);
+            const spinner = currentDay.querySelector('.spinner');
+            const iframe = currentDay.querySelector('iframe');
+
+            currentDay.style.display = 'flex';
+            spinner.style.display = 'block'; // Показать спиннер
+            iframe.style.display = 'none'; // Скрыть iframe пока грузится
+
+            // Установить ссылку на видео и обработчик загрузки
+            iframe.src = videoSrc;
+            iframe.onload = () => {
+                spinner.style.display = 'none'; // Скрыть спиннер
+                iframe.style.display = 'block'; // Показать iframe
+            };
+        }
+    </script>
+
+</body>
+</html>
