@@ -7,12 +7,12 @@
   "theme_color": "#ffffff",
   "icons": [
   {
-    "src": "/muscle.png",
+    "src": "https://drive.google.com/uc?id=1_jKRGco5BmqLYpr3T54cRxq5M2TQr6bI",
     "sizes": "192x192",
     "type": "image/png"
   },
   {
-    "src": "/muscle.png",
+    "src": "https://drive.google.com/uc?id=1_jKRGco5BmqLYpr3T54cRxq5M2TQr6bI",
     "sizes": "512x512",
     "type": "image/png"
   }
