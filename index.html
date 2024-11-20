@@ -10,7 +10,7 @@
     <title>Training plan Julia</title>
     <link rel="icon" href="https://raw.githubusercontent.com/trainingJL/trainingJL.github.io/main/muscle.png" type="image/png">
 
-    
+
 
 
     <!-- Указание, что это веб-приложение -->
@@ -29,7 +29,7 @@
     <link rel="manifest" href="https://raw.githubusercontent.com/trainingJL/trainingJL.github.io/main/manifest.json">
 
     <link rel="canonical" href="https://bootstrap-4.ru/docs/5.3/examples/album/">
-    
+
 
 
 
@@ -56,6 +56,29 @@
 
 
     <style>
+
+        #loading-spinnerApp {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff; /* Фон */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        /* Анимация спиннера */
+        .spinnerApp {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3; /* Светлая граница */
+            border-top: 5px solid #3498db; /* Темная граница */
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
 
         .video-container {
             display: none;
@@ -3489,6 +3512,9 @@
     </symbol>
 </svg>
 
+<div id="loading-spinnerApp">
+    <div class="spinnerApp"></div>
+</div>
 
 <header data-bs-theme="dark">
     <header>
@@ -4683,6 +4709,14 @@
                     activeLink.classList.add('active');
                 }
             }
+
+            window.addEventListener("load", function () {
+                // Убираем спиннер после загрузки страницы
+                const spinner = document.getElementById("loading-spinnerApp");
+                if (spinner) {
+                    spinner.style.display = "none";
+                }
+            });
         </script>
 
 
