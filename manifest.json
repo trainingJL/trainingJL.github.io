@@ -1,10 +1,10 @@
 {
-  "name": "Training with Julia",
-  "short_name": "Training with Julia",
+  "name": "TWJ",
+  "short_name": "TWJ",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#000000",
+  "theme_color": "#ffffff",
   "icons": [
     {
       "src": "https://raw.githubusercontent.com/trainingJL/trainingJL.github.io/main/muscle.png",
