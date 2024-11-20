@@ -6,15 +6,15 @@
   "background_color": "#ffffff",
   "theme_color": "#ffffff",
   "icons": [
-    {
-      "src": "https://raw.githubusercontent.com/trainingJL/trainingJL.github.io/main/muscle.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "https://raw.githubusercontent.com/trainingJL/trainingJL.github.io/main/muscle.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  {
+    "src": "/muscle.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  },
+  {
+    "src": "/muscle.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }
+]
 }
