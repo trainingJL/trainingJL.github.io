@@ -4757,7 +4757,6 @@
             document.addEventListener('DOMContentLoaded', function () {
                 const themeToggle = document.getElementById('bd-theme');
                 const themeButtons = document.querySelectorAll('[data-bs-theme-value]');
-                const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 
                 function setTheme(theme) {
                     document.documentElement.setAttribute('data-bs-theme', theme);
@@ -4787,6 +4786,11 @@
                         localStorage.setItem('theme', theme);
                     });
                 });
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const themeButtons = document.querySelectorAll('[data-bs-theme-value]');
+                const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 
                 function updateTheme(theme) {
                     document.documentElement.setAttribute('data-bs-theme', theme);
@@ -4812,8 +4816,8 @@
                         updateTheme(theme);
                     });
                 });
-
             });
+
         </script>
 
 
