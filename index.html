@@ -1,4 +1,4 @@
-<html lang="ru" data-bs-theme="dark">
+<html lang="ru" data-bs-theme="auto">
 <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/extend-native-history-api.js"></script>
 <script src="chrome-extension://eppiocemhmnlbhjplcgkofciiegomcon/libs/requests.js"></script>
 <head>
@@ -3512,11 +3512,46 @@
     </symbol>
 </svg>
 
+<div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+            id="bd-theme"
+            type="button"
+            aria-expanded="false"
+            data-bs-toggle="dropdown"
+            aria-label="Toggle theme (auto)">
+        <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
+                Light
+                <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
+                Dark
+                <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+            </button>
+        </li>
+        <li>
+            <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
+                Auto
+                <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
+            </button>
+        </li>
+    </ul>
+</div>
+
 <div id="loading-spinnerApp">
     <div class="spinnerApp"></div>
 </div>
 
-<header data-bs-theme="dark">
+<header data-bs-theme="auto">
     <header>
         <div class="container py-3 d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center link-body-emphasis text-decoration-none">
@@ -3549,15 +3584,15 @@
 
                 <ul class="nav nav-underline justify-content-center" id="tabs">
                     <li class="nav-item">
-                        <a class="nav-link active mb-3" style="color: darkgrey" aria-current="page" href="#"
+                        <a class="nav-link active mb-3 text-body-secondary" aria-current="page" href="#"
                            onclick="showTabContent('tab1')">Тренировка 1</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mb-3" style="color: darkgrey" href="#" onclick="showTabContent('tab2')">Тренировка
+                        <a class="nav-link mb-3 text-body-secondary" href="#" onclick="showTabContent('tab2')">Тренировка
                             2</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mb-3" style="color: darkgrey" href="#" onclick="showTabContent('tab3')">Тренировка
+                        <a class="nav-link mb-3 text-body-secondary" href="#" onclick="showTabContent('tab3')">Тренировка
                             3</a>
                     </li>
                 </ul>
@@ -4717,6 +4752,40 @@
                     spinner.style.display = "none";
                 }
             });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const themeToggle = document.getElementById('bd-theme');
+                const themeButtons = document.querySelectorAll('[data-bs-theme-value]');
+
+                function setTheme(theme) {
+                    document.documentElement.setAttribute('data-bs-theme', theme);
+
+                    themeButtons.forEach((button) => {
+                        const value = button.getAttribute('data-bs-theme-value');
+                        const isActive = value === theme;
+
+                        button.classList.toggle('active', isActive);
+                        button.setAttribute('aria-pressed', isActive);
+                    });
+                }
+
+                themeButtons.forEach((button) => {
+                    button.addEventListener('click', () => {
+                        const theme = button.getAttribute('data-bs-theme-value');
+                        setTheme(theme);
+                    });
+                });
+
+                const storedTheme = localStorage.getItem('theme') || 'auto';
+                setTheme(storedTheme);
+
+                themeButtons.forEach((button) => {
+                    button.addEventListener('click', () => {
+                        const theme = button.getAttribute('data-bs-theme-value');
+                        localStorage.setItem('theme', theme);
+                    });
+                });
+            });
         </script>
 
 
@@ -4724,8 +4793,8 @@
 
     <footer class="text-body-secondary py-5">
         <div class="container">
-
             <p class="mb-0">&copy; 2024 Юлин план тренировок. Все права защищены.</p>
+            <p><a class="link-opacity-50" href="https://t.me/ah4udo">Help</a></p>
         </div>
     </footer>
 
