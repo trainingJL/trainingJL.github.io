@@ -4789,33 +4789,8 @@
             });
 
             document.addEventListener('DOMContentLoaded', () => {
-                const themeButtons = document.querySelectorAll('[data-bs-theme-value]');
                 const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-
-                function updateTheme(theme) {
-                    document.documentElement.setAttribute('data-bs-theme', theme);
-                    localStorage.setItem('theme', theme);
-
-                    // Меняем цвет статус-бара
-                    if (theme === 'dark') {
-                        metaThemeColor.setAttribute('content', '#000000'); // Цвет для темной темы
-                    } else if (theme === 'light') {
-                        metaThemeColor.setAttribute('content', '#ffffff'); // Цвет для светлой темы
-                    } else {
-                        metaThemeColor.setAttribute('content', '#f8f9fa'); // Цвет по умолчанию
-                    }
-                }
-
-                // Инициализация темы
-                const savedTheme = localStorage.getItem('theme') || 'auto';
-                updateTheme(savedTheme);
-
-                themeButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        const theme = button.getAttribute('data-bs-theme-value');
-                        updateTheme(theme);
-                    });
-                });
+                metaThemeColor.setAttribute('content', '#ff0000'); // Установите красный цвет
             });
 
         </script>
