@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Training plan Julia">
+    <meta name="theme-color" content="#ffffff">
     <title>Training plan Julia</title>
     <link rel="icon" href="https://raw.githubusercontent.com/trainingJL/trainingJL.github.io/main/muscle.png" type="image/png">
 
@@ -17,7 +18,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- Устанавливает стиль браузера в полноэкранный режим -->
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- Название приложения, которое появится на главном экране -->
     <meta name="apple-mobile-web-app-title" content="Training plan Julia">
@@ -4756,6 +4757,7 @@
             document.addEventListener('DOMContentLoaded', function () {
                 const themeToggle = document.getElementById('bd-theme');
                 const themeButtons = document.querySelectorAll('[data-bs-theme-value]');
+                const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 
                 function setTheme(theme) {
                     document.documentElement.setAttribute('data-bs-theme', theme);
@@ -4767,39 +4769,15 @@
                         button.classList.toggle('active', isActive);
                         button.setAttribute('aria-pressed', isActive);
                     });
-                }
 
-                themeButtons.forEach((button) => {
-                    button.addEventListener('click', () => {
-                        const theme = button.getAttribute('data-bs-theme-value');
-                        setTheme(theme);
-                    });
-                });
-
-                const storedTheme = localStorage.getItem('theme') || 'auto';
-                setTheme(storedTheme);
-
-                themeButtons.forEach((button) => {
-                    button.addEventListener('click', () => {
-                        const theme = button.getAttribute('data-bs-theme-value');
-                        localStorage.setItem('theme', theme);
-                    });
-                });
-            });
-
-            document.addEventListener('DOMContentLoaded', function () {
-                const themeButtons = document.querySelectorAll('[data-bs-theme-value]');
-                const appleMetaTag = document.querySelector('meta[name="apple-mobile-web-app-status-bar-style"]');
-
-                function setTheme(theme) {
-                    document.documentElement.setAttribute('data-bs-theme', theme);
-
-                    // Изменяем стиль статус-бара для iOS
-                    if (appleMetaTag) {
+                    // Меняем цвет статус-бара
+                    if (metaThemeColor) {
                         if (theme === 'dark') {
-                            appleMetaTag.setAttribute('content', 'black'); // Чёрный статус-бар
+                            metaThemeColor.setAttribute('content', '#000000'); // Цвет для тёмной темы
+                        } else if (theme === 'light') {
+                            metaThemeColor.setAttribute('content', '#ffffff'); // Цвет для светлой темы
                         } else {
-                            appleMetaTag.setAttribute('content', 'default'); // Светлый статус-бар
+                            metaThemeColor.setAttribute('content', '#f8f9fa'); // Цвет для темы "auto" или по умолчанию
                         }
                     }
                 }
@@ -4808,13 +4786,14 @@
                     button.addEventListener('click', () => {
                         const theme = button.getAttribute('data-bs-theme-value');
                         setTheme(theme);
-                        localStorage.setItem('theme', theme);
+                        localStorage.setItem('theme', theme); // Сохраняем тему
                     });
                 });
 
                 const storedTheme = localStorage.getItem('theme') || 'auto';
                 setTheme(storedTheme);
             });
+
 
         </script>
 
