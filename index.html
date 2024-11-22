@@ -4757,6 +4757,7 @@
             document.addEventListener('DOMContentLoaded', function () {
                 const themeToggle = document.getElementById('bd-theme');
                 const themeButtons = document.querySelectorAll('[data-bs-theme-value]');
+                const metaThemeColor = document.querySelector('meta[name="theme-color"]');
 
                 function setTheme(theme) {
                     document.documentElement.setAttribute('data-bs-theme', theme);
@@ -4768,30 +4769,31 @@
                         button.classList.toggle('active', isActive);
                         button.setAttribute('aria-pressed', isActive);
                     });
+
+                    // Меняем цвет статус-бара
+                    if (metaThemeColor) {
+                        if (theme === 'dark') {
+                            metaThemeColor.setAttribute('content', '#000000'); // Цвет для тёмной темы
+                        } else if (theme === 'light') {
+                            metaThemeColor.setAttribute('content', '#ffffff'); // Цвет для светлой темы
+                        } else {
+                            metaThemeColor.setAttribute('content', '#f8f9fa'); // Цвет для темы "auto" или по умолчанию
+                        }
+                    }
                 }
 
                 themeButtons.forEach((button) => {
                     button.addEventListener('click', () => {
                         const theme = button.getAttribute('data-bs-theme-value');
                         setTheme(theme);
+                        localStorage.setItem('theme', theme); // Сохраняем тему
                     });
                 });
 
                 const storedTheme = localStorage.getItem('theme') || 'auto';
                 setTheme(storedTheme);
-
-                themeButtons.forEach((button) => {
-                    button.addEventListener('click', () => {
-                        const theme = button.getAttribute('data-bs-theme-value');
-                        localStorage.setItem('theme', theme);
-                    });
-                });
             });
 
-            document.addEventListener('DOMContentLoaded', () => {
-                const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-                metaThemeColor.setAttribute('content', '#ff0000'); // Установите красный цвет
-            });
 
         </script>
 
